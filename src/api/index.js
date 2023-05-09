@@ -10,7 +10,14 @@ import stringUtil from './local/string-api'
 
 // 设置默认的HTTP访问参数
 axios.defaults.timeout = constants.REMOTE_TIMEOUT
-axios.defaults.baseURL = constants.REMOTE_BASE_URL
+axios.defaults.baseURL = 'http://localhost:8082/restful'
+// axios.defaults.baseURL = constants.REMOTE_BASE_URL
+// axios.defaults.baseURL = 'http://localhost:8082/' + constants.REMOTE_BASE_URL
+// const service = axios.create({
+//   baseURL: 'http://127.0.0.1:8080/restful', // url = base url + request url
+//   // withCredentials: true, // send cookies when cross-domain requests
+//   timeout: 500000000 // request timeout
+// })
 
 /**
  * HTTP请求拦截器
@@ -27,6 +34,13 @@ axios.interceptors.request.use(config => {
       }
     }
   }
+  // config.headers = {
+  //   'Accept':
+  //     'application/json, text/plain, */*',
+  //   'Access-Control-Allow-Origin': '*',
+  //   'Access-Control-Allow-Methods': 'GET, DELETE, HEAD, OPTIONS'
+  // }
+  // console.log(config)
   return config
 }, error => {
   return Promise.reject(error)

@@ -13,7 +13,7 @@ export default {
   login (username, password) {
     return axios.get('/token', {
       // 认证、授权的API均以/oauth开头，而不是默认的/restful
-      baseURL: '/oauth',
+      baseURL: axios.defaults.baseURL.replace('/restful', '/oauth'),
       params: {
         username,
         password: api.encrypt.defaultEncode(password),
@@ -32,7 +32,7 @@ export default {
   refresh (refreshToken) {
     return axios.get('/token', {
       // 认证、授权的API均以/oauth开头，而不是默认的/restful
-      baseURL: '/oauth',
+      baseURL: axios.defaults.baseURL.replace('/restful', '/oauth'),
       params: {
         refresh_token: refreshToken,
         grant_type: constants.AUTH_REFRESH_TYPE,
